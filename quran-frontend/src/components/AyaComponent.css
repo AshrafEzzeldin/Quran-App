@@ -1,0 +1,40 @@
+/* AyaComponent.css */
+
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.options button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #000000;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.options button:hover {
+    background-color: #0056b3;
+}
+
+audio {
+    display: block;
+    margin: 20px auto;
+}
