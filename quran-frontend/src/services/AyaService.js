@@ -23,7 +23,6 @@ export const getAllAyas = () => {
 };
 
 export const createAya = (aya) => {
-    console.log(aya)
     return axios.post(API_URL, aya)
         .then(response =>console.log(response))
         .catch(error => {

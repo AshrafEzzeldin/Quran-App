@@ -10,7 +10,7 @@ const PronunciationComponent = ({ onPronunciationCheck, updateResult }) => {
     const [audioBlob, setAudioBlob] = useState(null);
     const [isBlocked, setIsBlocked] = useState(false);
     const backUrl = process.env.REACT_APP_BACKEND_URL;
-        useEffect(() => {
+    useEffect(() => {
         navigator.getUserMedia(
             { audio: true },
             () => {
@@ -64,12 +64,12 @@ const PronunciationComponent = ({ onPronunciationCheck, updateResult }) => {
         formData.append("file", audioBlob);
 
         //    to save the record
-        const url = URL.createObjectURL(audioBlob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "pronunciation.mp3";
-        a.click();
-        URL.revokeObjectURL(url);
+        // const url = URL.createObjectURL(audioBlob);
+        // const a = document.createElement("a");
+        // a.href = url;
+        // a.download = "pronunciation.mp3";
+        // a.click();
+        // URL.revokeObjectURL(url);
 
         axios
             .post(`${backUrl}/api/pronunciation/check`, formData, {
@@ -84,20 +84,32 @@ const PronunciationComponent = ({ onPronunciationCheck, updateResult }) => {
             .catch((error) => {
                 console.error("Error uploading audio:", error);
             });
+
+        setAudioBlob(null);    
     };
 
     return (
         <div>
-            <button onClick={startRecording} disabled={isRecording}>
+            <button
+                onClick={startRecording}
+                disabled={isRecording}
+                className={`record-btn ${isRecording ? 'btn-disabled' : ''}`}>
                 Start Recording
             </button>
-            <button onClick={stopRecording} disabled={!isRecording}>
+            <button
+                onClick={stopRecording}
+                disabled={!isRecording}
+                className={`stop-btn ${!isRecording ? 'btn-disabled' : ''}`}>
                 Stop Recording
             </button>
-            <button onClick={checkPronunciation} disabled={!audioBlob}>
+            <button
+                onClick={checkPronunciation}
+                disabled={!audioBlob}
+                className={`check-btn ${!audioBlob ? 'btn-disabled' : ''}`}>
                 Check Pronunciation
             </button>
         </div>
+
     );
 };
 

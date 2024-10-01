@@ -8,12 +8,16 @@ const AyaComponent = () => {
     const [aya, setAya] = useState(null);
     const [selectedWord, setSelectedWord] = useState(null);
     const [result, setResult] = useState(null);
-    const [ayaId, setAyaId] = useState(1);  // Initial Aya ID
+    const [ayaId, setAyaId] = useState(1);  
+    const [hide, sethide] = useState("hide");  
 
     useEffect(() => {
         getAyaById(ayaId)
             .then(ayaData => setAya(ayaData))
-            .catch(error => console.error('Error fetching Aya:', error));
+            .catch(error => {console.error('Error fetching Aya:', error);
+                setAyaId(ayaId-1);
+                alert("There is no next Aya")
+            });
     }, [ayaId]);
 
     const handleWordSelection = (word) => {
@@ -21,35 +25,35 @@ const AyaComponent = () => {
         setResult(null);
     };
 
-    const updateResult =(message)=>{
+    const updateResult = (message) => {
         setResult(message);
     }
 
     const onPronunciationCheck = (spokenWord) => {
-        alert("You have said: "+spokenWord+" and the correct "+aya.correctWord);
-        
+        alert("You have said: " + spokenWord + " and the correct " + aya.correctWord);
+
         if (spokenWord === aya.correctWord) {
             setResult("Correct pronunciation!");
         } else {
             setResult("Incorrect pronunciation, try again.");
         }
+        sethide(null);
     };
 
     const getNextAya = () => {
         setAyaId(prevId => prevId + 1);
+        sethide("hide");
         setResult("");
-        console.log(aya.ansPath);
-        
     };
 
-  
+
 
     if (!aya) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div className="container">       
+        <div className="container">
             <h2>{aya.ayaText}</h2>
             <div className="options">
                 {aya.options.map((option, index) => (
@@ -62,12 +66,13 @@ const AyaComponent = () => {
             <PronunciationComponent onPronunciationCheck={onPronunciationCheck} updateResult={updateResult} />
 
             {result && <p>{result}</p>}
-            
-            <p>The right answer</p>
-            <audio key={aya.ansPath}  controls>
-                <source src={`/assets/${aya.ansPath}`} type="audio/mpeg" />
-            </audio>
 
+            <div className={hide}>
+                <p>The right answer</p>
+                <audio key={aya.ansPath} controls disa>
+                    <source src={`/assets/${aya.ansPath}`} type="audio/mpeg" />
+                </audio>
+            </div>
             <button onClick={getNextAya}>Next Aya</button>
         </div>
     );

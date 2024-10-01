@@ -1,7 +1,9 @@
 package com.example.quranApp.controller;
 
+import com.example.quranApp.error.AyaNotFoundException;
 import com.example.quranApp.model.Aya;
 import com.example.quranApp.service.AyaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +27,12 @@ public class AyaController {
     }
 
     @GetMapping("/{id}")
-    public Aya getAyaById(@PathVariable Long id) {
-
-
+    public Aya getAyaById(@PathVariable Long id) throws AyaNotFoundException {
         return ayaService.getAyaById(id);
     }
 
     @PostMapping
-    public Aya createAya(@RequestBody Aya aya) {
+    public Aya createAya(@Valid @RequestBody Aya aya) {
         System.out.println(aya+" "+aya.getAyaText());
         return ayaService.createAya(aya);
     }

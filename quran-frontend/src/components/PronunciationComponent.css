@@ -1,17 +1,34 @@
-/* PronunciationComponent.css */
-
-button {
-    padding: 8px 15px;
-    border: none;
-    background-color: #007bff;
+.record-btn {
+    background-color: green;
     color: white;
-    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
     cursor: pointer;
-    margin-right: 5px;
-    margin-top: 10px;
 }
 
-button:disabled {
-    background-color: #ddd;
+.stop-btn {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.check-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-disabled {
+    background-color: grey;
     cursor: not-allowed;
 }

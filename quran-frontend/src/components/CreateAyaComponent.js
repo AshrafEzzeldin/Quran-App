@@ -45,7 +45,7 @@ const CreateAyaComponent = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
             <h3>Create Aya</h3>
             <div>
                 <label>Aya Text:</label>
