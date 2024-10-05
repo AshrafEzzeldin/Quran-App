@@ -1,4 +1,4 @@
-package com.example.quranApp.error;
+package com.example.quranApp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

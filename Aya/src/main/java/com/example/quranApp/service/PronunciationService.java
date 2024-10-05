@@ -28,6 +28,11 @@ public class PronunciationService {
         AUTH_TOKEN = token;
     }
 
+    public String checkPronunciation(byte[] audioBytes) throws IOException, InterruptedException {
+        System.out.println("analyzing");
+        return parse(sendAudioFile(audioBytes));
+    }
+
     public static String sendAudioFile(byte[] audioBytes) throws IOException, InterruptedException {
 
 
@@ -58,8 +63,4 @@ public class PronunciationService {
         return sb.toString();
     }
 
-    public String checkPronunciation(byte[] audioBytes) throws IOException, InterruptedException {
-        System.out.println("analyzing");
-        return parse(sendAudioFile(audioBytes));
-    }
 }

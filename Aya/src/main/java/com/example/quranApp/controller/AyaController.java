@@ -4,22 +4,26 @@ import com.example.quranApp.error.AyaNotFoundException;
 import com.example.quranApp.model.Aya;
 import com.example.quranApp.service.AyaService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/aya")
+@RequestMapping("/api/aya")
 @CrossOrigin(origins = "${frontend_url}")
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AyaController {
 
-    private final AyaService ayaService;
+    @Autowired
+    private AyaService ayaService;
 
-    public AyaController(AyaService ayaService) {
-        this.ayaService = ayaService;
-    }
 
     @GetMapping
     public List<Aya> getAllAyas() {
@@ -33,7 +37,7 @@ public class AyaController {
 
     @PostMapping
     public Aya createAya(@Valid @RequestBody Aya aya) {
-        System.out.println(aya+" "+aya.getAyaText());
+        System.out.println(aya + " " + aya.getAyaText());
         return ayaService.createAya(aya);
     }
 }
