@@ -1,0 +1,52 @@
+AUTH_TOKEN: Bearer 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
+
+frontend_url: http://localhost:3000
+
+API_URL: https://api-inference.huggingface.co/models/openai/whisper-large-v3
+
+spring:
+  profiles:
+    active: test
+  application:
+    name: quranApp
+  mvc:
+    cors:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET,POST,PUT,DELETE
+  datasource:
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/quranApp
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:mysql://localhost:3306/quranAppTest
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/quranAppProd
